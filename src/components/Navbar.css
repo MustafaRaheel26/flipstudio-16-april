@@ -1,0 +1,891 @@
+/* Updated Navbar.css - Bordered & Blurry Let's Talk Button */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap");
+@import url("https://fonts.cdnfonts.com/css/creato-display");
+@import url("https://fonts.cdnfonts.com/css/caghen");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+/* Add font-face declaration */
+@font-face {
+  font-family: "NeueHaasDisplayBold";
+  src: url("../assets/fonts/NeueHaasDisplayBold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins-Medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Coldiac";
+  src: url("../assets/fonts/Coldiac.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gogh";
+  src: url("../assets/fonts/Gogh-ExtraBold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: bold;
+  font-display: swap;
+}
+
+:root {
+  --nav-height: 75px;
+  --fg: #fff;
+  --bg-top: transparent;
+  --bg-scrolled: transparent;
+}
+
+/* Button reset styles */
+button {
+  background: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+button:focus,
+button:active {
+  outline: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+/* Base Navbar Styling */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    background-color 0.2s ease, backdrop-filter 0.2s ease;
+  backdrop-filter: none;
+  background: transparent;
+  border-bottom: none;
+  transform: translateY(0);
+  padding: 0;
+}
+
+/* Show dark background when scrolled OR when reappearing after being hidden */
+.navbar--scrolled,
+.navbar:not(.navbar--top) {
+  background: #000;
+  border-bottom: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.navbar--hidden {
+  transform: translateY(-100%);
+}
+
+.navbar-inner {
+  width: 95%;
+  max-width: 1400px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding: 0 30px;
+}
+
+/* Logo Image Styles */
+.brand {
+  text-decoration: none;
+  color: var(--fg);
+  user-select: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-image {
+  height: 40px;
+  width: auto;
+  transition: all 0.3s ease;
+}
+
+.brand:hover .logo-image {
+  transform: scale(1.08);
+}
+
+/* Navigation Links Containers */
+.nav-links-left,
+.nav-links-right {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  z-index: 3;
+}
+
+.nav-links-left {
+  margin-right: auto;
+  padding-left: 5px;
+}
+
+.nav-links-right {
+  margin-left: auto;
+  padding-right: 5px;
+  gap: 32px;
+}
+
+/* Navigation Links - Fixed cutting issue */
+.nav-link {
+  color: var(--fg);
+  text-decoration: none;
+  font-family: "Gogh", sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  line-height: 1.3em;
+  border-radius: 0;
+  overflow: visible;
+  position: relative;
+  white-space: nowrap;
+  pointer-events: auto;
+  transition: color 200ms ease;
+  margin: 0;
+}
+
+.nav-link .letter,
+.nav-link .letter-clone {
+  font-weight: bold;
+  letter-spacing: 0;
+}
+
+/* Remove background hover; replace with a smooth underline shown via ::after */
+.nav-link:hover,
+.nav-link:focus {
+  background: transparent;
+}
+
+/* underline pseudo-element - grows from left to right */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+  bottom: 4px;
+  width: 0%;
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.95);
+  transition: width 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-radius: 1px;
+  max-width: calc(100% - 32px);
+}
+
+.nav-link:hover::after,
+.nav-link:focus::after,
+.nav-link.active::after {
+  width: calc(100% - 32px);
+}
+
+/* Letter Animation for Nav Links */
+.letter-container {
+  display: inline-block;
+  position: relative;
+  height: 1.1em;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.letter,
+.letter-clone {
+  display: inline-block;
+  position: relative;
+  transform: translateY(0);
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--delay);
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.letter-clone {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  font-weight: 500;
+}
+
+/* Hover animation — vertical stairway with smooth rise */
+.nav-link:hover .letter {
+  transform: translateY(-100%);
+}
+
+.nav-link:hover .letter-clone {
+  transform: translateY(-100%);
+}
+
+/* Active state for nav links */
+.nav-link.active {
+  color: #fff;
+  font-weight: 600;
+  background: transparent;
+}
+
+/* ENHANCED: Bordered & Blurry Let's Talk Button Styles */
+.lets-talk-btn {
+  background: rgba(255, 255, 255, 0.05) !important; /* Subtle transparent background */
+  border: none !important; /* White border */
+  color: var(--fg);
+  border-radius: 50px;
+  font-family: "Gogh", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  overflow: hidden;
+  height: 38px;
+  padding: 0 15px;
+  white-space: nowrap;
+  pointer-events: auto;
+  outline: none !important;
+  margin-left: 8px;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  text-shadow: none;
+  backdrop-filter: blur(8px); /* Blurry effect */
+  -webkit-backdrop-filter: blur(8px); /* Safari support */
+}
+
+.lets-talk-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lets-talk-btn.hover .lets-talk-content {
+  transform: translateX(-8px);
+  gap: 6px;
+}
+
+/* Plus Container */
+.plus-container {
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  flex-shrink: 0;
+  order: 2;
+}
+
+.lets-talk-btn.hover .plus-container {
+  background: #ffffff;
+  order: 1;
+  transform: translateX(-2px);
+}
+
+.plus-icon {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 300;
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  line-height: 1;
+}
+
+.lets-talk-btn.hover .plus-icon {
+  color: #000000;
+  transform: rotate(45deg);
+}
+
+/* Text Container */
+.lets-talk-text-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 100%;
+  order: 1;
+}
+
+.lets-talk-btn.hover .lets-talk-text-container {
+  order: 2;
+}
+
+.lets-talk-text,
+.say-hi-text {
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.say-hi-text {
+  position: absolute;
+  left: 0;
+  opacity: 0;
+  transform: translateX(10px);
+}
+
+.lets-talk-btn .lets-talk-text {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.lets-talk-btn.hover .lets-talk-text {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.lets-talk-btn.hover .say-hi-text {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Hover effects - Keep border, change background slightly */
+.lets-talk-btn:hover,
+.lets-talk-btn:focus,
+.lets-talk-btn.hover:hover,
+.lets-talk-btn.hover:focus {
+  background: rgba(255, 255, 255, 0.1) !important; /* Slightly more visible on hover */
+  border: 1px solid rgba(255, 255, 255, 0.5) !important; /* Brighter border on hover */
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  outline: none !important;
+}
+
+/* ========== FIXED HAMBURGER STYLES ========== */
+.hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  outline: none;
+  z-index: 10001;
+  padding: 0;
+  margin: 0;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  box-shadow: none;
+}
+
+.hamburger:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.hamburger-box {
+  width: 24px;
+  height: 16px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hamburger-inner {
+  display: block;
+  position: relative;
+  width: 24px;
+  height: 2px;
+  background: #ffffff;
+  transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  border-radius: 1px;
+}
+
+.hamburger-inner::before,
+.hamburger-inner::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background: #ffffff;
+  transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  border-radius: 1px;
+  left: 0;
+}
+
+.hamburger-inner::before {
+  top: -6px;
+  transform-origin: center;
+}
+
+.hamburger-inner::after {
+  top: 6px;
+  transform-origin: center;
+}
+
+/* Active state with smooth animation */
+.hamburger.is-active .hamburger-inner {
+  transform: rotate(135deg);
+  background: #ffffff;
+}
+
+.hamburger.is-active .hamburger-inner::before {
+  top: 0;
+  transform: rotate(90deg);
+  background: #ffffff;
+}
+
+.hamburger.is-active .hamburger-inner::after {
+  top: 0;
+  transform: rotate(0);
+  opacity: 0;
+}
+
+/* ========== FIXED MOBILE MENU STYLES ========== */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #000;
+  z-index: 9998;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  padding: 80px 20px 40px;
+}
+
+.mobile-menu.is-active {
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-menu-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  transform: translateY(20px);
+  transition: transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s;
+  width: 100%;
+  max-width: 280px;
+}
+
+.mobile-menu.is-active .mobile-menu-content {
+  transform: translateY(0);
+}
+
+/* REMOVED duplicate close button - using only hamburger toggle */
+.mobile-close {
+  display: none;
+}
+
+/* ========== FIXED MOBILE LINKS WITH EXACT TEXT WIDTH UNDERLINE ========== */
+.mobile-link {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  padding: 16px 0;
+  margin: 0;
+  text-align: center;
+  cursor: pointer;
+  color: #fff;
+  font-family: "Gogh", sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  display: inline-block;
+  line-height: 1.3;
+  border-radius: 0;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-link * {
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+.mobile-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  width: 0%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.95);
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-radius: 0;
+  transform: translateX(-50%);
+}
+
+/* Only show underline for active mobile links - exact text width */
+.mobile-link.active::after {
+  width: 100%;
+}
+
+/* Remove hover underline for mobile - only active state */
+.mobile-link:hover::after,
+.mobile-link:focus::after {
+  width: 0%;
+}
+
+/* keep entrance animation */
+.mobile-menu.is-active .mobile-link {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger animation for mobile links */
+.mobile-menu.is-active .mobile-link:nth-child(1) { transition-delay: 0.1s; }
+.mobile-menu.is-active .mobile-link:nth-child(2) { transition-delay: 0.15s; }
+.mobile-menu.is-active .mobile-link:nth-child(3) { transition-delay: 0.2s; }
+.mobile-menu.is-active .mobile-link:nth-child(4) { transition-delay: 0.25s; }
+.mobile-menu.is-active .mobile-link:nth-child(5) { transition-delay: 0.3s; }
+
+/* ========== FIXED MOBILE LET'S TALK BUTTON ========== */
+.mobile-lets-talk-btn {
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  outline: none !important;
+  color: #fff;
+  border-radius: 50px;
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  overflow: hidden;
+  height: 38px;
+  padding: 0 16px;
+  white-space: nowrap;
+  margin-top: 20px;
+  opacity: 0;
+  transform: translateY(15px);
+  -webkit-tap-highlight-color: transparent;
+  min-width: 0;
+  flex-shrink: 0;
+  text-shadow: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.mobile-lets-talk-btn:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Mobile content wrapper */
+.mobile-lets-talk-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Plus Container for Mobile */
+.mobile-plus-container {
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  flex-shrink: 0;
+  order: 2;
+  margin-left: 4px;
+}
+
+.mobile-lets-talk-btn.hover .mobile-plus-container {
+  background: #ffffff;
+  order: 1;
+  transform: translateX(-2px);
+  margin-left: 0;
+  margin-right: 4px;
+}
+
+.mobile-plus-icon {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 300;
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-lets-talk-btn.hover .mobile-plus-icon {
+  color: #000000;
+  transform: rotate(45deg);
+}
+
+/* Text Container for Mobile */
+.mobile-lets-talk-text-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+  order: 1;
+  min-width: 60px;
+  flex-shrink: 0;
+}
+
+.mobile-lets-talk-text,
+.mobile-say-hi-text {
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  white-space: nowrap;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.mobile-say-hi-text {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  transform: translateX(8px);
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+}
+
+.mobile-lets-talk-btn .mobile-lets-talk-text {
+  opacity: 1;
+  transform: translateX(0);
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+}
+
+.mobile-lets-talk-btn.hover .mobile-lets-talk-text {
+  opacity: 0;
+  transform: translateX(-8px);
+}
+
+.mobile-lets-talk-btn.hover .mobile-say-hi-text {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Hover effects for mobile */
+.mobile-lets-talk-btn:hover,
+.mobile-lets-talk-btn:focus,
+.mobile-lets-talk-btn.hover:hover,
+.mobile-lets-talk-btn.hover:focus {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  outline: none !important;
+}
+
+.mobile-menu.is-active .mobile-lets-talk-btn {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.35s;
+}
+
+/* Remove old mobile button styles */
+.lets-talk-emoji {
+  display: none;
+}
+
+/* ========== RESPONSIVE ADJUSTMENTS ========== */
+@media (max-width: 980px) {
+  .nav-links-left,
+  .nav-links-right {
+    display: none;
+  }
+
+  .brand {
+    position: static;
+    transform: none;
+    margin: 0 auto;
+    z-index: 10001;
+  }
+
+  .hamburger {
+    display: flex;
+    position: relative;
+    right: 0;
+  }
+
+  .logo-image {
+    height: 35px;
+  }
+
+  .navbar-inner {
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+
+  /* Prevent body scroll when menu is open */
+  body.mobile-menu-open {
+    overflow: hidden;
+  }
+
+  /* Ensure navbar has proper spacing */
+  .navbar {
+    height: var(--nav-height);
+    min-height: 75px;
+  }
+}
+
+@media (min-width: 981px) {
+  .hamburger {
+    right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-inner {
+    padding: 0 15px;
+  }
+
+  .logo-image {
+    height: 32px;
+  }
+
+  .mobile-link {
+    font-size: 14px;
+    padding: 14px 0;
+  }
+
+  .mobile-menu-content {
+    gap: 28px;
+    max-width: 260px;
+  }
+
+  .hamburger {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* Mobile Let's Talk Button - 480px adjustments */
+  .mobile-lets-talk-btn {
+    height: 36px;
+    font-size: 11px;
+    padding: 0 14px;
+    margin-top: 16px;
+  }
+  
+  .mobile-plus-container {
+    width: 18px;
+    height: 18px;
+    margin-left: 3px;
+  }
+  
+  .mobile-plus-icon {
+    font-size: 11px;
+  }
+  
+  .mobile-lets-talk-text-container {
+    min-width: 55px;
+  }
+  
+  .mobile-lets-talk-btn.hover .mobile-plus-container {
+    margin-right: 3px;
+  }
+
+  /* Ensure enough bottom padding to prevent cutting */
+  .mobile-menu {
+    padding: 80px 20px 60px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+  .mobile-link {
+    font-size: 13px;
+    padding: 12px 0;
+  }
+
+  .mobile-menu-content {
+    gap: 24px;
+  }
+
+  /* Mobile Let's Talk Button - 360px adjustments */
+  .mobile-lets-talk-btn {
+    height: 34px;
+    font-size: 10px;
+    padding: 0 12px;
+    margin-top: 12px;
+  }
+  
+  .mobile-plus-container {
+    width: 16px;
+    height: 16px;
+    margin-left: 2px;
+  }
+  
+  .mobile-plus-icon {
+    font-size: 10px;
+  }
+  
+  .mobile-lets-talk-text-container {
+    min-width: 50px;
+  }
+  
+  .mobile-lets-talk-btn.hover .mobile-plus-container {
+    margin-right: 2px;
+  }
+}

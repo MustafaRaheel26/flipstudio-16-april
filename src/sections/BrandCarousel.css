@@ -1,0 +1,185 @@
+/* src/sections/BrandCarousel.css - UPDATED */
+.brands-section {
+  padding: 80px 0 160px; /* Increased bottom padding from 120px to 160px */
+  background: #000;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 60px; /* Added margin after section */
+}
+
+.brands-section::before,
+.brands-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 100px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.brands-section::before {
+  left: 0;
+  background: linear-gradient(90deg, #000 0%, transparent 100%);
+}
+
+.brands-section::after {
+  right: 0;
+  background: linear-gradient(270deg, #000 0%, transparent 100%);
+}
+
+.brands-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px; /* Added container padding */
+}
+
+.brands-inner {
+  position: relative;
+  margin-bottom: 40px; /* Added margin after inner container */
+}
+
+.brands-track {
+  display: flex;
+  gap: 60px; /* Increased gap between brand items */
+  animation: scroll 40s linear infinite;
+  padding: 40px 0; /* Increased track padding */
+}
+
+.brand-item {
+  flex: 0 0 auto;
+  width: 180px; /* Increased brand item width */
+  height: 95px; /* Increased brand item height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  padding: 20px; /* Added padding inside brand items */
+}
+
+.brand-logo {
+  width: 100%;
+  height: auto;
+  max-height: 65px; /* Increased logo size */
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* Converts to white */
+}
+
+.brands-spacer {
+  height: 80px; /* Added spacer element after section */
+  background: transparent;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-240px * 12)); /* Updated for larger items */
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .brands-section {
+    padding: 70px 0 140px;
+    margin-bottom: 50px;
+  }
+  
+  .brands-container {
+    padding: 0 30px;
+  }
+  
+  .brands-inner {
+    margin-bottom: 35px;
+  }
+  
+  .brands-track {
+    gap: 50px;
+    padding: 35px 0;
+  }
+  
+  .brand-item {
+    width: 165px;
+    height: 85px;
+    padding: 18px;
+  }
+  
+  .brand-logo {
+    max-height: 60px;
+  }
+  
+  .brands-spacer {
+    height: 70px;
+  }
+}
+
+@media (max-width: 768px) {
+  .brands-section {
+    padding: 60px 0 120px;
+    margin-bottom: 40px;
+  }
+  
+  .brands-container {
+    padding: 0 25px;
+  }
+  
+  .brands-inner {
+    margin-bottom: 30px;
+  }
+  
+  .brand-item {
+    width: 150px;
+    height: 80px;
+    padding: 15px;
+  }
+  
+  .brands-track {
+    gap: 40px;
+    padding: 30px 0;
+    animation-duration: 35s;
+  }
+  
+  .brand-logo {
+    max-height: 55px;
+  }
+  
+  .brands-spacer {
+    height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .brands-section {
+    padding: 50px 0 100px;
+    margin-bottom: 30px;
+  }
+  
+  .brands-container {
+    padding: 0 20px;
+  }
+  
+  .brands-inner {
+    margin-bottom: 25px;
+  }
+  
+  .brand-item {
+    width: 130px;
+    height: 70px;
+    padding: 12px;
+  }
+  
+  .brands-track {
+    gap: 35px;
+    padding: 25px 0;
+    animation-duration: 30s;
+  }
+  
+  .brand-logo {
+    max-height: 45px;
+  }
+  
+  .brands-spacer {
+    height: 50px;
+  }
+}

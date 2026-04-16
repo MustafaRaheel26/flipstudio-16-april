@@ -1,0 +1,751 @@
+/* ProjectDetail.css */
+
+/* Default state - transparent navbar */
+@font-face {
+  font-family: 'NeueHaasDisplayBold';
+  src: url('../assets/fonts/NeueHaasDisplayBold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CreatoDisplay-Light";
+  src: url("../assets/fonts/CreatoDisplay-Light.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'helveticaneuecyr';
+  src: url('../assets/fonts/helveticaneuecyr_black.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.project-detail-page .navbar {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  border-bottom: none !important;
+  transition: all 0.3s ease;
+}
+
+/* Scrolled state - opaque navbar */
+.project-detail-page.project-nav-scrolled .navbar {
+  background: #000 !important;
+  backdrop-filter: blur(10px) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.12) !important;
+}
+
+.project-detail {
+  background: #000;
+  color: #fff;
+  min-height: 100vh;
+  text-transform: uppercase; /* Added for all text in project detail */
+}
+
+/* Text Positioning Variables - Easy to modify */
+:root {
+  /* Hero Text Positioning */
+  --hero-text-left: 40px;
+  --hero-text-bottom: auto;
+  --hero-text-top: 65%;
+  --hero-text-width: 60%;
+  
+  /* Meta Info Positioning */
+  --meta-right: 40px;
+  --meta-bottom: 60px;
+  --meta-left: auto;
+  --meta-top: 86.8%;
+  --meta-gap: 40px;
+  
+  /* Font Sizes */
+  --title-font-size: clamp(3rem, 8vw, 5rem);
+  --subtitle-font-size: 1.2rem;
+  --meta-label-size: 0.8rem;
+  --meta-value-size: 1.2rem;
+  
+  /* Text Alignment */
+  --hero-text-align: left;
+  --meta-text-align: right;
+}
+
+/* Loading */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #333;
+  border-top: 2px solid #fff;
+  border-radius: 0;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Hero Section - Updated for precise positioning */
+.project-hero {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.project-hero-bg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0,0,0,0.4) 50%,
+    rgba(0,0,0,0.9) 100%
+  );
+}
+
+.project-hero-content {
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  text-transform: uppercase; /* Added */
+  letter-spacing: 0em !important;
+}
+
+/* ============================= */
+/* DESKTOP LAYOUT (768px and above) */
+/* ============================= */
+
+/* Title and Subtitle - Desktop */
+.hero-text-bottom-left {
+  position: absolute;
+  left: var(--hero-text-left);
+  top: var(--hero-text-top);
+  bottom: var(--hero-text-bottom);
+  max-width: var(--hero-text-width);
+  pointer-events: auto;
+  text-align: var(--hero-text-align);
+  transform: translateY(-50%);
+}
+
+.hero-text-bottom-left h1 {
+  font-size: var(--title-font-size);
+  margin: 0 0 20px;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase; /* Already uppercase */
+  letter-spacing: 0em;
+  line-height: 1.1;
+  font-family: 'Gogh', sans-serif;
+  font-style: bold !important;
+}
+
+/* Desktop Subtitle */
+.hero-subtitle {
+  font-size: var(--subtitle-font-size);
+  color: rgba(255,255,255,0.9);
+  margin: 80px 0 0 0;
+  text-transform: uppercase; /* Already uppercase */
+  letter-spacing: 0em;
+  line-height: 1.4;
+  font-weight: 400;
+  font-family: 'Gogh', sans-serif;
+  display: block;
+  position: relative;
+  top: auto;
+  left: auto;
+  max-width: var(--hero-text-width);
+  transform: none;
+}
+
+/* Meta Information - Desktop */
+.project-meta-bottom-right {
+  position: absolute;
+  left: var(--meta-left);
+  right: var(--meta-right);
+  top: var(--meta-top);
+  bottom: var(--meta-bottom);
+  pointer-events: auto;
+  text-align: var(--meta-text-align);
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: var(--meta-gap);
+  align-items: start;
+  justify-content: end;
+  text-transform: uppercase; /* Added */
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.meta-label {
+  color: rgba(255,255,255,0.7);
+  font-size: var(--meta-label-size);
+  text-transform: uppercase; /* Already uppercase */
+  letter-spacing: 0.15em;
+  line-height: 1.2;
+  font-weight: 500;
+  font-family: 'Gogh', sans-serif;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.meta-value {
+  font-size: var(--meta-value-size);
+  font-weight: normal;
+  color: #fff;
+  line-height: 1.2;
+  font-family: 'Gogh', sans-serif;
+  white-space: nowrap;
+  text-transform: uppercase; /* Added */
+}
+
+/* Mobile-only subtitle (hidden on desktop) */
+.mobile-subtitle {
+  display: none;
+}
+
+/* ============================= */
+/* MOBILE RESPONSIVE STYLES (768px and below) */
+/* ============================= */
+
+@media (max-width: 768px) {
+  /* Mobile Hero Section Layout - VERTICAL STACK */
+  .project-hero {
+    height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 40px;
+  }
+  
+  .project-hero-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 20px;
+    pointer-events: auto;
+    width: 100%;
+    height: auto;
+    text-transform: uppercase; /* Added */
+  }
+  
+  /* Title - Top of stack */
+  .hero-text-bottom-left {
+    position: relative;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transform: none;
+    max-width: 100%;
+    width: 100%;
+    margin-bottom: 30px;
+    order: 1;
+    text-align: left;
+  }
+  
+  .hero-text-bottom-left h1 {
+    font-size: clamp(2.5rem, 10vw, 3.5rem);
+    margin-bottom: 15px;
+    line-height: 1.1;
+    text-transform: uppercase; /* Already uppercase */
+  }
+  
+  /* Hide desktop subtitle on mobile */
+  .hero-subtitle {
+    display: none !important;
+  }
+  
+  /* Meta Info - Middle of stack */
+  .project-meta-bottom-right {
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    transform: none;
+    text-align: left;
+    margin-bottom: 40px;
+    order: 2;
+    width: 100%;
+  }
+  
+  .meta-grid {
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: start;
+    gap: 25px 20px;
+    text-transform: uppercase; /* Added */
+  }
+  
+  .meta-item {
+    gap: 6px;
+  }
+  
+  .meta-label {
+    font-size: 0.75rem;
+    text-align: left;
+    white-space: nowrap;
+    text-transform: uppercase; /* Already uppercase */
+  }
+  
+  .meta-value {
+    font-size: 1rem;
+    text-align: left;
+    white-space: normal;
+    text-transform: uppercase; /* Added */
+  }
+  
+  /* Mobile Subtitle - Bottom of stack */
+  .mobile-subtitle {
+    display: block;
+    order: 3;
+    width: 100%;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.9);
+    text-transform: uppercase; /* Already uppercase */
+    letter-spacing: 0.1em;
+    line-height: 1.4;
+    font-weight: 400;
+    font-family: 'Gogh', sans-serif;
+    margin-top: 20px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+  }
+}
+
+/* Tablet adjustments (768px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  :root {
+    --hero-text-left: 30px;
+    --hero-text-top: 45%;
+    --hero-text-width: 70%;
+    
+    --meta-right: 30px;
+    --meta-top: 60%;
+    --meta-gap: 25px;
+    
+    --subtitle-font-size: 1.1rem;
+    --meta-label-size: 0.75rem;
+    --meta-value-size: 1.1rem;
+  }
+  
+  .hero-subtitle {
+    top: calc(var(--hero-text-top) + 150px);
+  }
+  
+  .fullwidth-image {
+    height: 70vh;
+  }
+  
+  .hero-image {
+    height: 70vh;
+  }
+}
+
+/* Small Mobile (480px and below) */
+@media (max-width: 480px) {
+  .project-hero {
+    padding-bottom: 30px;
+  }
+  
+  .project-hero-content {
+    padding: 0 15px;
+  }
+  
+  .hero-text-bottom-left h1 {
+    font-size: clamp(2.2rem, 11vw, 3rem);
+    margin-bottom: 12px;
+    text-transform: uppercase; /* Already uppercase */
+  }
+  
+  .hero-text-bottom-left {
+    margin-bottom: 25px;
+  }
+  
+  .project-meta-bottom-right {
+    margin-bottom: 35px;
+  }
+  
+  .meta-grid {
+    gap: 20px 15px;
+    text-transform: uppercase; /* Added */
+  }
+  
+  .meta-label {
+    font-size: 0.7rem;
+    text-transform: uppercase; /* Already uppercase */
+  }
+  
+  .meta-value {
+    font-size: 0.9rem;
+    text-transform: uppercase; /* Added */
+  }
+  
+  .mobile-subtitle {
+    font-size: 0.9rem;
+    padding-top: 25px;
+    margin-top: 15px;
+    line-height: 1.3;
+    text-transform: uppercase; /* Already uppercase */
+  }
+}
+
+/* Extra Small Mobile (360px and below) */
+@media (max-width: 360px) {
+  .project-hero {
+    padding-bottom: 25px;
+  }
+  
+  .project-hero-content {
+    padding: 0 12px;
+  }
+  
+  .hero-text-bottom-left h1 {
+    font-size: clamp(1.8rem, 12vw, 2.5rem);
+    text-transform: uppercase; /* Already uppercase */
+  }
+  
+  .meta-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    text-transform: uppercase; /* Added */
+  }
+  
+  .meta-item {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .meta-label, .meta-value {
+    white-space: nowrap;
+    text-transform: uppercase; /* Already uppercase / Added */
+  }
+  
+  .mobile-subtitle {
+    font-size: 0.85rem;
+    padding-top: 20px;
+    text-transform: uppercase; /* Already uppercase */
+  }
+}
+
+/* Project Content - Visual Only */
+.project-content-visual {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  text-transform: uppercase; /* Added */
+}
+
+/* Full Width Gallery Styles */
+.fullwidth-gallery {
+  width: 100%;
+  padding: 40px 0;
+  background: #000;
+}
+
+.fullwidth-gallery-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.fullwidth-image {
+  width: 100%;
+  height: 80vh;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  border-radius: 0;
+  opacity: 0;
+  transform: translateY(60px) scale(0.95);
+  transition:
+    opacity 1.2s ease-out,
+    transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fullwidth-image.animated {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.fullwidth-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fullwidth-image:hover img {
+  transform: scale(1.03);
+}
+
+/* Hero Image Styles */
+.hero-image-section {
+  width: 100%;
+  padding: 80px 0;
+  background: #000;
+}
+
+.hero-image {
+  width: 100%;
+  height: 90vh;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  border-radius: 0;
+  opacity: 0;
+  transform: scale(0.9);
+  transition:
+    opacity 1.2s ease-out,
+    transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hero-image.animated {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-image:hover img {
+  transform: scale(1.02);
+}
+
+/* Base Gallery Image Styles */
+.gallery-image {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  border-radius: 0;
+  opacity: 0;
+  transition:
+    opacity 1.2s ease-out,
+    transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.gallery-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-image:hover img {
+  transform: scale(1.08);
+}
+
+/* Updated Navigation Button Styles */
+.project-navigation {
+  display: flex;
+  justify-content: center;
+  padding: 80px 20px 60px;
+  border-top: 1px solid #333;
+  background: #000;
+  margin-bottom: 0;
+  text-transform: uppercase; /* Added */
+}
+
+.back-to-projects-btn {
+  color: #fff;
+  padding: 0.7em 1.7em;
+  font-size: 18px;
+  border-radius: 0.5em;
+  background: #212121;
+  border: 1px solid #212121;
+  transition: all 0.3s;
+  box-shadow: 6px 6px 12px #000, -6px -6px 12px #2f2f2f;
+  cursor: pointer;
+  text-decoration: none;
+  text-transform: uppercase; /* Already uppercase */
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'helveticaneuecyr', sans-serif;
+  font-weight: 600;
+}
+
+.back-to-projects-btn:active {
+  color: #666;
+  box-shadow: inset 4px 4px 12px #000, inset -4px -4px 12px #1f1f1f;
+}
+
+.back-to-projects-btn:hover {
+  transform: translateX(-5px);
+}
+
+.btn-arrow {
+  font-size: 1.1rem;
+}
+
+/* Responsive adjustments for galleries */
+@media (max-width: 1024px) {
+  .fullwidth-image {
+    height: 70vh;
+  }
+  
+  .hero-image {
+    height: 70vh;
+  }
+  
+  .fullwidth-gallery {
+    padding: 30px 0;
+  }
+  
+  .fullwidth-gallery-container {
+    gap: 40px;
+    padding: 0 15px;
+  }
+  
+  .hero-image-section {
+    padding: 60px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .fullwidth-image {
+    height: 60vh;
+  }
+  
+  .hero-image {
+    height: 60vh;
+  }
+  
+  .fullwidth-gallery {
+    padding: 30px 0;
+  }
+  
+  .fullwidth-gallery-container {
+    gap: 40px;
+    padding: 0 15px;
+  }
+  
+  .project-navigation {
+    padding: 60px 20px 40px;
+    text-transform: uppercase; /* Added */
+  }
+  
+  .back-to-projects-btn {
+    text-transform: uppercase; /* Already uppercase */
+  }
+}
+
+@media (max-width: 480px) {
+  .fullwidth-image {
+    height: 50vh;
+  }
+  
+  .hero-image {
+    height: 50vh;
+  }
+  
+  .fullwidth-gallery {
+    padding: 20px 0;
+  }
+  
+  .fullwidth-gallery-container {
+    gap: 30px;
+    padding: 0 10px;
+  }
+  
+  .project-navigation {
+    padding: 40px 15px 30px;
+    text-transform: uppercase; /* Added */
+  }
+  
+  .back-to-projects-btn {
+    padding: 0.6em 1.4em;
+    font-size: 16px;
+    text-transform: uppercase; /* Already uppercase */
+  }
+}
+
+@media (max-width: 360px) {
+  .fullwidth-image {
+    height: 40vh;
+  }
+  
+  .hero-image {
+    height: 40vh;
+  }
+  
+  .project-navigation {
+    padding: 30px 10px 25px;
+    text-transform: uppercase; /* Added */
+  }
+  
+  .back-to-projects-btn {
+    padding: 0.5em 1.2em;
+    font-size: 14px;
+    text-transform: uppercase; /* Already uppercase */
+  }
+}
+
+/* Force all text elements to be uppercase */
+.project-detail * {
+  text-transform: uppercase !important;
+  letter-spacing: 0 !important;
+}
+
+/* Specifically target any remaining elements that might not be covered */
+.project-detail p,
+.project-detail span,
+.project-detail div,
+.project-detail h1,
+.project-detail h2,
+.project-detail h3,
+.project-detail h4,
+.project-detail h5,
+.project-detail h6,
+.project-detail a,
+.project-detail button,
+.project-detail .meta-value,
+.project-detail .meta-label,
+.project-detail .hero-subtitle,
+.project-detail .mobile-subtitle,
+.project-detail .back-to-projects-btn,
+.project-detail .btn-arrow {
+  text-transform: uppercase !important;
+}

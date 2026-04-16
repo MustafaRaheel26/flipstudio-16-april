@@ -1,0 +1,699 @@
+/* ============================= */
+/* FONTS */
+/* ============================= */
+@font-face {
+  font-family: "NeueHaasDisplayBold";
+  src: url("../assets/fonts/NeueHaasDisplayBold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins-Medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Coldiac";
+  src: url("../assets/fonts/Coldiac.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'helveticaneuecyr';
+  src: url('../assets/fonts/helveticaneuecyr_black.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============================= */
+/* MAIN LAYOUT */
+/* ============================= */
+.projects-main-page {
+  background: #000;
+  color: #fff;
+  min-height: 100vh;
+  --category-height: 60px;
+  padding-top: calc(var(--nav-height, 80px) + var(--category-height));
+}
+
+/* ============================= */
+/* FIXED CATEGORY BAR - UPDATED TO MATCH NAVBAR STYLE */
+/* ============================= */
+.categories-section {
+  background: #000;
+  padding: 20px 0;
+  width: 100vw;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: var(--nav-height, 80px);
+  z-index: 9999;
+  border-bottom: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  height: var(--category-height, 60px);
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: top 200ms ease;
+  text-align: center;
+}
+
+.categories-section.nav-hidden {
+  top: 0;
+}
+
+.categories-section.nav-visible {
+  top: var(--nav-height, 80px);
+}
+
+.categories-section::-webkit-scrollbar {
+  display: none;
+}
+
+.categories-container {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 max(40px, env(safe-area-inset-right));
+  min-width: max-content;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  justify-content: center;
+  box-sizing: border-box;
+  padding-right: calc(env(safe-area-inset-right, 40px) + 20px);
+}
+
+.category-link {
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  font-family: "Gogh", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  position: relative;
+  white-space: nowrap;
+  padding: 14px 16px;
+  transition: color 0.3s ease;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  display: inline-block;
+  text-align: center;
+  line-height: 1.3em;
+  border-radius: 0;
+  overflow: visible;
+  pointer-events: auto;
+  margin: 0;
+}
+
+.category-link.active {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Underline animation matching navbar */
+.category-link::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+  bottom: 4px;
+  width: 0%;
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.95);
+  transition: width 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-radius: 1px;
+  max-width: calc(100% - 32px);
+}
+
+.category-link:hover::after,
+.category-link:focus::after,
+.category-link.active::after {
+  width: calc(100% - 32px);
+}
+
+.category-link:hover {
+  color: #fff;
+  background: transparent;
+}
+
+/* Letter animation for category links */
+.letter-container {
+  display: inline-block;
+  position: relative;
+  height: 1.1em;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.letter,
+.letter-clone {
+  display: inline-block;
+  position: relative;
+  transform: translateY(0);
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--delay);
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.letter-clone {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  font-weight: 500;
+}
+
+/* Hover animation — vertical stairway with smooth rise */
+.category-link:hover .letter {
+  transform: translateY(-100%);
+}
+
+.category-link:hover .letter-clone {
+  transform: translateY(-100%);
+}
+
+/* Remove old underline styles */
+.link-underline {
+  display: none;
+}
+
+/* ============================= */
+/* PROJECTS GRID */
+/* ============================= */
+.projects-grid-section {
+  padding: 40px 20px;
+  margin-top: var(--category-height);
+  min-height: 60vh;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #333;
+  border-top: 2px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================= */
+/* TRUE MASONRY GRID */
+/* ============================= */
+.projects-grid-masonry {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns, 2), 1fr);
+  grid-auto-rows: 10px;
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: #000;
+  width: 100%;
+}
+
+.project-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background: #000;
+  border-radius: 0;
+  transition: all 0.3s ease;
+  grid-row-end: span var(--span-rows, 45);
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  min-height: 200px;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
+}
+
+/* ============================= */
+/* CARD CONTENT - UPDATED HOVER EFFECT */
+/* ============================= */
+.project-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.project-image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+  display: block;
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.08);
+}
+
+.project-name-static {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.95));
+  padding: 12px 10px;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.project-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #fff;
+  font-family: "NeueHaasDisplayBold", sans-serif;
+}
+
+/* Glass/Crystal Effect Overlay */
+.project-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 20px 16px;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 3;
+  /* Crystal shine effect */
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3),
+              0 0 0 1px rgba(255, 255, 255, 0.1);
+  border-radius: 0;
+}
+
+/* Add shimmer effect on hover */
+.project-card:hover .project-overlay {
+  opacity: 1;
+}
+
+/* Optional: Add a subtle gradient shine animation on hover */
+.project-card:hover .project-overlay::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent 70%
+  );
+  animation: crystal-shine 0.8s ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes crystal-shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+.project-info {
+  color: #fff;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Project name inside overlay - positioned above details */
+.project-name-overlay {
+  margin-bottom: 8px;
+}
+
+.project-title-overlay {
+  font-size: 4rem;
+  font-weight: 600;
+  letter-spacing: 0px;
+  margin: 0;
+  line-height: 0.6;
+  text-transform: uppercase;
+  letter-spacing: 0em;
+  color: #fff;
+  font-family: "NeueHaasDisplayBold", sans-serif;
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-title-overlay {
+  transform: translateY(0);
+}
+
+.project-meta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0em;
+  flex-wrap: wrap;
+  font-family: "helveticaneuecyr", sans-serif;
+}
+
+.project-year::after,
+.project-location::after {
+  content: "•";
+  margin-left: 8px;
+  opacity: 0.7;
+}
+
+.project-category {
+  padding: 3px 4px;
+  border-radius: 3px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  font-family: "helveticaneuecyr", sans-serif;
+}
+
+.project-description {
+  font-size: 1.2rem;
+  line-height: 1;
+  color: #fff;
+  margin: 0;
+  font-weight: 300;
+  letter-spacing: 0em;
+  font-family: "helveticaneuecyr", sans-serif;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-clamp: 3;
+  margin-bottom: -10px;
+}
+
+/* ============================= */
+/* RESPONSIVE DESIGN - UPDATED FOR NEW HOVER EFFECT */
+/* ============================= */
+@media (min-width: 1025px) {
+  .projects-grid-masonry {
+    --grid-columns: 2;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .projects-grid-masonry {
+    --grid-columns: 2;
+    gap: 18px;
+  }
+  .categories-container {
+    gap: 25px;
+    padding: 0 30px;
+  }
+  .category-link {
+    font-size: 11px;
+    padding: 12px 14px;
+  }
+  .project-meta {
+    font-size: 0.7rem;
+    gap: 8px;
+  }
+  .project-description {
+    font-size: 0.75rem;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+  .project-name-static {
+    padding: 10px 8px;
+  }
+  .project-title {
+    font-size: 0.9rem;
+  }
+  .project-title-overlay {
+    font-size: 0.9rem;
+  }
+  .project-overlay {
+    padding: 16px 12px;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 481px) {
+  .projects-main-page {
+    padding-top: 120px;
+  }
+  .categories-section {
+    top: var(--nav-height, 80px);
+    height: 50px;
+    padding: 15px 0;
+  }
+  .projects-grid-section {
+    padding: 20px 15px;
+  }
+  .projects-grid-masonry {
+    --grid-columns: 2;
+    gap: 16px;
+  }
+  .project-name-static {
+    padding: 8px 6px;
+  }
+  .project-title {
+    font-size: 0.85rem;
+  }
+  .project-title-overlay {
+    font-size: 0.85rem;
+  }
+  .categories-container {
+    gap: 20px;
+    padding: 0 25px;
+  }
+  .category-link {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    padding: 10px 12px;
+  }
+  .project-description {
+    -webkit-line-clamp: 2;
+    font-size: 0.7rem;
+    line-clamp: 2;
+  }
+  .project-overlay {
+    padding: 14px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-main-page {
+    padding-top: 110px;
+  }
+  .categories-section {
+    top: var(--nav-height, 80px);
+    height: 45px;
+    padding: 12px 0;
+  }
+  .projects-grid-section {
+    padding: 15px 10px;
+  }
+  .projects-grid-masonry {
+    --grid-columns: 1;
+    gap: 15px;
+  }
+  .project-title {
+    font-size: 0.8rem;
+  }
+  .project-title-overlay {
+    font-size: 0.8rem;
+  }
+  .categories-container {
+    gap: 15px;
+    padding: 0 20px;
+  }
+  .category-link {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    padding: 8px 10px;
+  }
+  .project-meta {
+    font-size: 0.65rem;
+    gap: 6px;
+    flex-direction: column;
+  }
+  .project-year::after,
+  .project-location::after {
+    display: none;
+  }
+  .project-category {
+    font-size: 0.6rem;
+    padding: 2px 6px;
+  }
+  .project-description {
+    font-size: 0.7rem;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+  .project-overlay {
+    padding: 12px 8px;
+  }
+}
+
+@media (max-width: 360px) {
+  .categories-container {
+    gap: 12px;
+  }
+  .category-link {
+    font-size: 8px;
+    padding: 6px 8px;
+  }
+  .project-title {
+    font-size: 0.75rem;
+  }
+  .project-title-overlay {
+    font-size: 0.75rem;
+  }
+  .project-meta {
+    font-size: 0.6rem;
+  }
+  .project-name-static {
+    padding: 5px 4px;
+  }
+  .project-description {
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+  }
+  .projects-grid-masonry {
+    gap: 12px;
+  }
+}
+
+/* ============================= */
+/* TOUCH OPTIMIZATION - UPDATED */
+/* ============================= */
+@media (hover: none) and (pointer: coarse) {
+  .project-card:hover {
+    transform: none;
+  }
+
+  .project-overlay {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 8px;
+  }
+
+  .project-info {
+    gap: 4px;
+  }
+  
+  .project-name-overlay {
+    margin-bottom: 4px;
+  }
+  
+  .project-title-overlay {
+    font-size: 0.8rem;
+  }
+  
+  .project-description {
+    display: none;
+  }
+}
+
+/* ============================= */
+/* HIGH DENSITY + ACCESSIBILITY */
+/* ============================= */
+@media (min-resolution: 192dpi) {
+  .project-image {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card,
+  .project-image,
+  .project-overlay,
+  .project-overlay::before {
+    transition: none;
+    animation: none;
+  }
+  .project-card:hover {
+    transform: none;
+  }
+  .project-card:hover .project-overlay::before {
+    animation: none;
+  }
+}
+
+/* ============================= */
+/* BUTTON STYLES */
+/* ============================= */
+button {
+  color: #fff;
+  padding: 0.7em 1.7em;
+  font-size: 18px;
+  border-radius: 0.5em;
+  background: #212121;
+  border: 1px solid #212121;
+  transition: all 0.3s;
+  box-shadow: 6px 6px 12px #000, -6px -6px 12px #2f2f2f;
+}
+
+button:active {
+  color: #666;
+  box-shadow: inset 4px 4px 12px #000, inset -4px -4px 12px #1f1f1f;
+}

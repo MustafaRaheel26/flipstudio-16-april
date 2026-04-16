@@ -1,0 +1,132 @@
+/* src/sections/TextReveal.css - ULTRA FORCE BLACK TEXT */
+.tu-section {
+  width: 100%;
+  background: #000000;
+  padding: 80px 20px 60px;
+  min-height: 200vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0px;
+  transition: background 0.1s ease-out;
+  position: relative;
+}
+
+/* Add top and bottom fade effect */
+.tu-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 20%;
+  background: linear-gradient(to bottom, 
+    rgba(0, 0, 0, 1) 0%, 
+    rgba(0, 0, 0, 0) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.tu-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20%;
+  background: linear-gradient(to top, 
+    rgba(0, 0, 0, 1) 0%, 
+    rgba(0, 0, 0, 0) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.tu-text-block {
+  position: relative;
+  z-index: 2;
+}
+
+.tu-text-line {
+  font-family: "Gogh", sans-serif;
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+  max-width: 1200px;
+  line-height: -2;
+  letter-spacing: -0.02em;
+  margin: -2px 0;
+  color: #000000 !important; /* Force black at line level */
+}
+
+.tu-word {
+  white-space: nowrap;
+  display: inline-block;
+  color: #000000 !important; /* Force black at word level */
+}
+
+.tu-word-half {
+  display: inline-block;
+  color: #000000 !important; /* Force black at half level */
+}
+
+.tu-char {
+  display: inline-block;
+  color: #000000 !important; /* FORCE BLACK with !important */
+  opacity: 0.1;
+  transition: opacity 0.1s ease-out;
+}
+
+/* Nuclear option: Target every possible char selector */
+.tu-section .tu-char,
+.tu-section [class*="char"],
+.tu-section span[class*="char"],
+.tu-section .tu-text-line span,
+.tu-section .tu-text-line .tu-char {
+  color: #000000 !important;
+}
+
+.tu-space {
+  display: inline-block;
+  width: 0.25em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .tu-section {
+    gap: 0px;
+    min-height: 160vh;
+    padding: 70px 20px 50px;
+  }
+  .tu-text-line {
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
+    margin: 8px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .tu-section {
+    gap: 0px;
+    min-height: 140vh;
+    padding: 60px 20px 40px;
+  }
+  .tu-text-line {
+    font-size: clamp(1.6rem, 6vw, 3rem);
+    line-height: 1.15;
+    margin: 6px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .tu-section {
+    gap: 0px;
+    min-height: 120vh;
+    padding: 50px 15px 30px;
+  }
+  .tu-text-line {
+    font-size: clamp(1.4rem, 7vw, 2.5rem);
+    line-height: 1.2;
+    margin: 4px 0;
+  }
+}

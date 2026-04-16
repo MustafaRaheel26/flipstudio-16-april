@@ -1,0 +1,489 @@
+/* ContactInfoPage.css */
+
+@font-face {
+  font-family: 'NeueHaasDisplayBold';
+  src: url('../assets/fonts/NeueHaasDisplayBold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../assets/fonts/Poppins-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'helveticaneuecyr';
+  src: url('../assets/fonts/helveticaneuecyr_black.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CreatoDisplay-Light";
+  src: url("../assets/fonts/CreatoDisplay-Light.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.contact-info-page {
+  min-height: 100vh;
+  background: #000000; /* Changed to pure black */
+  display: flex;
+  flex-direction: column;
+  font-family: 'Gogh', sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Enhanced Background with Islamic pattern */
+.parallax-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(184, 134, 11, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(139, 0, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+
+
+@keyframes patternFloat {
+  0% {
+    background-position: 0 0, 25px 25px;
+  }
+  100% {
+    background-position: 50px 50px, 75px 75px;
+  }
+}
+
+/* Main centered container */
+.contact-container {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 80vh;
+  padding: 120px 20px 40px; /* Increased top padding for desktop */
+}
+
+/* Header */
+.contact-header {
+  text-align: center;
+  margin-bottom: 30px;
+  width: 100%;
+  position: relative;
+}
+
+.title-decoration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 15px;
+}
+
+
+/* Title animation - preserved */
+.main-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  font-family: 'Gogh', sans-serif;
+  margin-top: 0; /* Ensure no negative margins */
+  line-height: 58px;
+  
+}
+
+.title-word {
+  display: inline-block;
+  opacity: 0;
+  animation: titleReveal 1.2s ease-out forwards;
+}
+
+.title-word:nth-child(1) {
+  animation-delay: 0.3s;
+}
+
+.title-word:nth-child(2) {
+  animation-delay: 0.6s;
+}
+
+@keyframes titleReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Centered branches list - very close spacing (5px) */
+.branches-list-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.branch-item-simple {
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  opacity: 0;
+  animation: branchReveal 0.8s ease-out forwards;
+  width: 100%;
+  padding: 15px 12px;
+  position: relative;
+}
+
+@keyframes branchReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.branch-item-simple::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: transform 0.6s ease;
+}
+
+.branch-item-simple:hover::before {
+  transform: translateX(-50%) scaleX(1);
+}
+
+.branch-content {
+  transition: all 0.4s ease;
+}
+
+.branch-item-simple:hover {
+  transform: translateY(-2px);
+}
+
+.branch-name-simple {
+  font-size: clamp(1.1rem, 2.8vw, 1.6rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  transition: all 0.4s ease;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+  animation-delay: calc(var(--animation-order, 0) * 0.1s + 0.3s);
+  font-family: 'Gogh', sans-serif;
+}
+
+.branch-item-simple:hover .branch-name-simple {
+  color: #f8f8f8;
+}
+
+.branch-address-simple {
+  font-size: clamp(0.8rem, 1.6vw, 0.9rem);
+  color: #d8e5de;
+  letter-spacing: 0.8px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  transition: all 0.4s ease;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+  animation-delay: calc(var(--animation-order, 0) * 0.1s + 0.5s);
+  font-family: 'Gogh', sans-serif;
+}
+
+.branch-item-simple:hover .branch-address-simple {
+  color: #cccccc;
+}
+
+/* CENTRALIZED contact info */
+.branch-contact-info-simple {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateY(10px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.branch-item-simple:hover .branch-contact-info-simple {
+  max-height: 120px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contact-item-simple {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+  padding: 3px 0;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateX(-20px);
+  justify-content: center; /* Changed from flex-start to center */
+  width: auto;
+}
+
+.branch-item-simple:hover .contact-item-simple {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.branch-item-simple:hover .contact-item-simple:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+.branch-item-simple:hover .contact-item-simple:nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+.contact-icon {
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.contact-item-simple:hover .contact-icon {
+  transform: scale(1.1);
+}
+
+.contact-text-simple {
+  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+  color: #ffffff;
+  letter-spacing: 0.8px;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  font-family: 'Gogh', sans-serif;
+}
+
+.contact-item-simple:hover .contact-text-simple {
+  color: #f0f0f0;
+}
+
+/* Footer wrapper */
+.contact-footer-wrapper {
+  width: 100%;
+  margin-top: auto;
+}
+
+/* Base animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes lineReveal {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Animation delays for branches */
+.branch-item-simple:nth-child(1) { --animation-order: 1; }
+.branch-item-simple:nth-child(2) { --animation-order: 2; }
+.branch-item-simple:nth-child(3) { --animation-order: 3; }
+.branch-item-simple:nth-child(4) { --animation-order: 4; }
+.branch-item-simple:nth-child(5) { --animation-order: 5; }
+.branch-item-simple:nth-child(6) { --animation-order: 6; }
+
+/* ===== Mobile Responsive Fixes ===== */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .contact-container {
+    padding: 100px 20px 40px; /* Increased top padding for tablets */
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .contact-container {
+    padding: 140px 15px 30px; /* Significantly increased top padding for mobile */
+    min-height: 70vh;
+  }
+
+  .contact-header {
+    margin-bottom: 25px;
+  }
+
+  .title-decoration {
+    gap: 15px;
+    margin-bottom: 12px;
+  }
+
+  .decoration-line {
+    width: 40px;
+  }
+
+  .main-title {
+    margin-top: 10px; /* Extra margin for title */
+  }
+
+  .branches-list-centered {
+    gap: 4px;
+  }
+
+  .branch-item-simple {
+    padding: 12px 8px;
+  }
+
+  .branch-contact-info-simple {
+    padding-left: 0; /* Remove left padding for mobile */
+  }
+
+  .contact-item-simple {
+    justify-content: center; /* Ensure center alignment on mobile */
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .contact-container {
+    padding: 130px 10px 20px; /* Even more padding for very small screens */
+    min-height: 65vh;
+  }
+
+  .contact-header {
+    margin-bottom: 20px;
+  }
+
+  .title-decoration {
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .decoration-line {
+    width: 20px;
+  }
+
+  .main-title {
+    margin-top: 15px; /* More margin for very small screens */
+    font-size: clamp(2rem, 8vw, 3rem); /* Slightly smaller font */
+  }
+
+  .branches-list-centered {
+    gap: 3px;
+  }
+
+  .branch-item-simple {
+    padding: 10px 6px;
+  }
+
+  .branch-contact-info-simple {
+    padding-left: 0; /* Remove left padding for small mobile */
+  }
+
+  .branch-name-simple {
+    font-size: clamp(1rem, 4vw, 1.3rem);
+  }
+
+  .branch-address-simple {
+    font-size: clamp(0.75rem, 3vw, 0.85rem);
+  }
+
+  .contact-item-simple {
+    justify-content: center; /* Ensure center alignment on small mobile */
+  }
+}
+
+/* Very Small Mobile */
+@media (max-width: 360px) {
+  .contact-container {
+    padding: 120px 8px 15px;
+  }
+
+  .main-title {
+    font-size: clamp(1.8rem, 9vw, 2.5rem);
+    margin-top: 20px;
+  }
+
+  /* Add safe area for notch devices */
+  .contact-container {
+    padding-top: max(120px, env(safe-area-inset-top, 120px));
+  }
+}
+
+/* Touch device support */
+@media (hover: none) and (pointer: coarse) {
+  .branch-contact-info-simple {
+    max-height: 120px;
+    opacity: 1;
+    transform: translateY(0);
+    margin-top: 8px;
+    text-align: center;
+    padding-left: 0; /* Remove left padding for touch devices */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .branch-item-simple:hover {
+    transform: none;
+  }
+
+  .contact-item-simple {
+    opacity: 1;
+    transform: translateX(0);
+    justify-content: center; /* Center align for touch devices */
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

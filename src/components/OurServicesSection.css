@@ -1,0 +1,242 @@
+/* OurServicesSection.css */
+.our-services-section {
+  margin-top: -50px;
+  padding: 100px 0;
+  background: rgba(0, 0, 0, 0);
+  font-family: 'helveticaneuecyr', sans-serif;
+  overflow: hidden;
+  position: relative;
+
+
+  /* Customizable color variables */
+  --text-color: #fff;
+  --text-color-secondary: #ccc;
+  --accent-color: #fff;
+  --background-color: rgba(255, 255, 255, 0.02);
+  --border-color: rgba(255, 255, 255, 0.1);
+
+  min-height: 100vh;
+  padding: 100px 0;
+}
+
+/* ------------------------------
+   SPLIT SECTION LAYOUT
+--------------------------------*/
+.split-section {
+  position: relative;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+/* ------------------------------
+   HEADINGS - WITH FADE EFFECT
+--------------------------------*/
+.split-left,
+.split-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  will-change: transform, opacity;
+  pointer-events: none;
+ 
+}
+
+
+.split-left {
+  left: 25%;
+  transform: translateY(-50%) translateX(-10%);
+}
+
+.split-right {
+  right: 25%;
+  transform: translateY(-50%) translateX(10%);
+}
+
+.split-left h2,
+.split-right h2 {
+  font-size: clamp(3rem, 8vw, 8rem);
+  font-weight: 900;
+  color: var(--text-color);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  margin: 0;
+  font-family: 'Gogh', sans-serif;
+  white-space: nowrap;
+  transition: none !important;
+}
+
+/* ------------------------------
+   SERVICES LIST CONTAINER
+--------------------------------*/
+.services-list-container {
+  position: relative;
+  z-index: 3;
+  max-width: 600px;
+  margin-top: 100px;
+  transition: none !important;
+  will-change: transform, opacity;
+}
+
+.services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ------------------------------
+   SERVICE LINK ITEM
+--------------------------------*/
+.service-link-item {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0px;
+  will-change: transform, opacity;
+}
+
+.service-link-item:last-child {
+  border-bottom: none;
+}
+
+/* ------------------------------
+   SERVICE LINK STYLE
+--------------------------------*/
+.service-link {
+  color: var(--text-color-secondary);
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  display: block;
+  padding: 0px 0;
+  font-family: 'Gogh', sans-serif;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.service-link::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: var(--accent-color);
+  transition: left 0.3s ease;
+}
+
+.service-link:hover,
+.service-link:focus {
+  color: var(--text-color);
+  transform: translateX(10px);
+}
+
+.service-link:hover::before,
+.service-link:focus::before {
+  left: 0;
+}
+
+.service-link:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 4px;
+}
+
+/* ------------------------------
+   RESPONSIVE DESIGN
+--------------------------------*/
+@media (max-width: 1024px) {
+  .split-left h2,
+  .split-right h2 {
+    font-size: clamp(2.5rem, 6vw, 6rem);
+  }
+
+  .split-left {
+    left: 20%;
+    transform: translateY(-50%) translateX(-8%);
+  }
+
+  .split-right {
+    right: 20%;
+    transform: translateY(-50%) translateX(8%);
+  }
+
+  .services-list-container {
+    max-width: 500px;
+  }
+
+  .service-link {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .our-services-section {
+    padding: 60px 0;
+  }
+
+  .split-section {
+    min-height: 300px;
+    padding: 40px 0;
+    flex-direction: column;
+  }
+
+  .split-left,
+  .split-right {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    transform: none !important;
+    margin-bottom: 10px;
+  }
+
+  .split-left h2,
+  .split-right h2 {
+    font-size: clamp(2rem, 8vw, 4rem);
+    text-align: center;
+  }
+
+  .services-list-container {
+    max-width: 100%;
+  }
+
+  .service-link {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  .service-link:hover,
+  .service-link:focus {
+    transform: translateX(5px);
+  }
+}
+
+@media (max-width: 480px) {
+  .our-services-section {
+    padding: 40px 0;
+  }
+
+  .split-left h2,
+  .split-right h2 {
+    font-size: clamp(1.8rem, 7vw, 3rem);
+  }
+
+  .services-list {
+    gap: 8px;
+  }
+
+  .service-link {
+    font-size: 1rem;
+    padding: 8px 0;
+  }
+
+  .split-section {
+    min-height: 250px;
+  }
+}

@@ -1,0 +1,106 @@
+/* src/components/EnhancedPreloader.css */
+@import url('https://fonts.cdnfonts.com/css/creato-display');
+@import url('https://fonts.cdnfonts.com/css/caghen');
+
+.enhanced-preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.preloader-content {
+  text-align: center;
+  width: 100%;
+}
+
+.words-wrapper {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: clamp(8px, 2vw, 20px);
+  flex-wrap: wrap;
+}
+
+.word-container {
+  display: flex;
+  align-items: baseline;
+  color: white;
+  line-height: 1;
+}
+
+/* FLIP */
+.flip-word {
+  font-family: 'Creato Display', sans-serif;
+  font-weight: 700;
+  font-size: clamp(3.5rem, 8vw, 5rem);
+}
+
+.flip-word .letter-container {
+  margin-right: clamp(2px, 0.5vw, 8px);
+}
+
+/* STUDIO */
+.studio-word {
+  font-family: 'Caghen Demo', serif;
+  font-weight: 300;
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+}
+
+.studio-word .letter-container {
+  margin-right: clamp(1px, 0.3vw, 5px);
+}
+
+/* Letters */
+.letter-container {
+  position: relative;
+  display: inline-block;
+}
+
+.text-stroke {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
+  -webkit-text-stroke: 1.5px #fff;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+}
+
+.text-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #fff;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0.8;
+}
+
+.text-final {
+  position: relative;
+  z-index: 2;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .flip-word { font-size: clamp(2.8rem, 12vw, 3.5rem); }
+  .studio-word { font-size: clamp(1.8rem, 7vw, 2.5rem); }
+}
+
+/* Disable scroll */
+body.preloader-active {
+  overflow: hidden !important;
+}
+
+body.preloader-active .navbar,
+body.preloader-active .app-content {
+  display: none !important;
+}

@@ -1,0 +1,620 @@
+/* src/pages/ServicesPage.css */
+
+@font-face {
+  font-family: 'NeueHaasDisplayBold';
+  src: url('../assets/fonts/NeueHaasDisplayBold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../assets/fonts/Poppins-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.services-main-page {
+  min-height: 100vh;
+  background: #000000;
+  color: #fff;
+  overflow-x: hidden;
+  font-family: 'Gogh', sans-serif;
+}
+
+/* Page Header */
+.services-header {
+  padding: 130px 20px 80px;
+  text-align: center;
+  background: #000000;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Gogh', sans-serif;
+}
+
+/* Remove gradient backgrounds */
+.services-header::before {
+  display: none;
+}
+
+.header-content {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  font-family: 'Gogh', sans-serif;
+}
+
+.page-title {
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 900;
+  margin-bottom: 0;
+  background: linear-gradient(135deg, #fff 0%, #ccc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-transform: uppercase;
+  letter-spacing: 0em;
+  line-height: 1.1;
+  font-family: 'Gogh', sans-serif;
+  margin-top: 10px;
+}
+
+/* Services Grid Section */
+.services-grid-section {
+  padding: 60px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: #000000;
+  font-family: 'Gogh', sans-serif;
+}
+
+.services-container {
+  width: 100%;
+  font-family: 'Gogh', sans-serif;
+}
+
+/* ===== HOTEL STYLE LAYOUT ===== */
+.services-grid-hotel {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  perspective: 1000px;
+  font-family: 'Gogh', sans-serif;
+}
+
+.service-card-hotel {
+  position: relative;
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  height: 500px;
+  font-family: 'Gogh', sans-serif;
+}
+
+.service-card-hotel:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.service-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  font-family: 'Gogh' sans-serif;
+}
+
+.service-image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Gogh', sans-serif;
+}
+
+.service-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.9);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: block;
+}
+
+.service-card-hotel:hover .service-image {
+  transform: scale(1.08);
+}
+
+/* Hotel Style Overlay - Always Visible */
+.service-overlay-hotel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px;
+  background: linear-gradient(transparent 0%, rgba(0, 0, 0, 0.9) 100%);
+  z-index: 2;
+  font-family: 'Gogh', sans-serif;
+}
+
+.service-content-hotel {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  font-family: 'Gogh', sans-serif;
+}
+
+.service-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex: 1;
+  font-family: 'Gogh', sans-serif;
+}
+
+.service-title-hotel {
+  font-size: 34.1333px;
+  font-weight: 600;
+  line-height: 37.5467px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0em;
+  line-height: 1;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  font-family: 'Gogh', sans-serif;
+}
+
+/* ===== LET'S TALK BUTTON STYLES ===== */
+.lets-talk-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  border-radius: 50px;
+  font-family: "Gogh", sans-serif;
+  font-size: 12.1333px;
+  font-weight: 600;
+  letter-spacing: 0em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  overflow: hidden;
+  height: 38px;
+  padding: 0 15px;
+  white-space: nowrap;
+  pointer-events: auto;
+  outline: none;
+  text-decoration: none;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.lets-talk-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lets-talk-btn.hover .lets-talk-content {
+  transform: translateX(-8px);
+  gap: 6px;
+}
+
+/* Plus Container */
+.plus-container {
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  flex-shrink: 0;
+  order: 2;
+}
+
+.lets-talk-btn.hover .plus-container {
+  background: #ffffff;
+  order: 1;
+  transform: translateX(-2px);
+}
+
+.plus-icon {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 300;
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  line-height: 1;
+}
+
+.lets-talk-btn.hover .plus-icon {
+  color: #000000;
+  transform: rotate(45deg);
+}
+
+/* Text Container */
+.lets-talk-text-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 100%;
+  order: 1;
+}
+
+.lets-talk-btn.hover .lets-talk-text-container {
+  order: 2;
+}
+
+.lets-talk-text,
+.say-hi-text {
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  white-space: nowrap;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.say-hi-text {
+  position: absolute;
+  left: 0;
+  opacity: 0;
+  transform: translateX(10px);
+}
+
+.lets-talk-btn .lets-talk-text {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.lets-talk-btn.hover .lets-talk-text {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.lets-talk-btn.hover .say-hi-text {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Hover effects */
+.lets-talk-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.lets-talk-btn.hover:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  width: 100%;
+  background: #000000;
+  font-family: 'Gogh', sans-serif;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top: 3px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 1024px) {
+  .services-grid-hotel {
+    gap: 30px;
+  }
+  
+  .service-card-hotel {
+    height: 450px;
+  }
+  
+  .service-title-hotel {
+    font-size: 28px;
+    line-height: 32px;
+  }
+  
+  .service-overlay-hotel {
+    padding: 30px;
+  }
+  
+  .lets-talk-btn {
+    height: 36px;
+    padding: 0 14px;
+    font-size: 11px;
+  }
+  
+  .plus-container {
+    width: 22px;
+    height: 22px;
+  }
+  
+  .plus-icon {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-header {
+    padding: 110px 15px 60px;
+    background: #000000;
+  }
+  
+  .services-grid-section {
+    padding: 40px 15px;
+    background: #000000;
+  }
+  
+  /* Stack to single column on mobile */
+  .services-grid-hotel {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .service-card-hotel {
+    height: 400px;
+  }
+  
+  .service-overlay-hotel {
+    padding: 25px;
+  }
+  
+  .service-content-hotel {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .service-title-hotel {
+    font-size: 24px;
+    line-height: 28px;
+  }
+  
+  .lets-talk-btn {
+    align-self: stretch;
+    text-align: center;
+    justify-content: center;
+    height: 34px;
+    padding: 0 12px;
+    font-size: 10px;
+  }
+  
+  .plus-container {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .plus-icon {
+    font-size: 12px;
+  }
+  
+  .lets-talk-content {
+    gap: 6px;
+  }
+  
+  .lets-talk-btn.hover .lets-talk-content {
+    transform: translateX(-6px);
+    gap: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-header {
+    padding: 90px 10px 40px;
+    background: #000000;
+  }
+  
+  .page-title {
+    font-size: clamp(2.5rem, 12vw, 4rem);
+  }
+  
+  .services-grid-section {
+    padding: 30px 10px;
+    background: #000000;
+  }
+  
+  .service-card-hotel {
+    height: 350px;
+  }
+  
+  .service-overlay-hotel {
+    padding: 20px;
+  }
+  
+  .service-title-hotel {
+    font-size: 20px;
+    line-height: 24px;
+  }
+  
+  .lets-talk-btn {
+    height: 32px;
+    padding: 0 10px;
+    font-size: 9px;
+  }
+  
+  .plus-container {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .plus-icon {
+    font-size: 11px;
+  }
+  
+  .lets-talk-text,
+  .say-hi-text {
+    letter-spacing: 0.06em;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+  .services-header {
+    padding: 80px 8px 30px;
+  }
+  
+  .services-grid-section {
+    padding: 25px 8px;
+  }
+  
+  .service-card-hotel {
+    height: 320px;
+  }
+  
+  .service-overlay-hotel {
+    padding: 18px;
+  }
+  
+  .service-title-hotel {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  
+  .lets-talk-btn {
+    height: 30px;
+    padding: 0 8px;
+    font-size: 8px;
+  }
+  
+  .plus-container {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .plus-icon {
+    font-size: 10px;
+  }
+}
+
+/* Remove rounded corners */
+.service-card-hotel,
+.service-image {
+  border-radius: 0 !important;
+}
+
+/* Touch device support */
+@media (hover: none) and (pointer: coarse) {
+  .service-card-hotel:hover {
+    transform: none;
+  }
+  
+  .lets-talk-btn.hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+  
+  .lets-talk-btn.hover .lets-talk-content {
+    transform: none;
+    gap: 8px;
+  }
+  
+  .lets-talk-btn.hover .plus-container {
+    background: rgba(255, 255, 255, 0.15);
+    order: 2;
+    transform: none;
+  }
+  
+  .lets-talk-btn.hover .plus-icon {
+    color: #ffffff;
+    transform: none;
+  }
+  
+  .lets-talk-btn.hover .lets-talk-text-container {
+    order: 1;
+  }
+  
+  .lets-talk-btn.hover .lets-talk-text {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .lets-talk-btn.hover .say-hi-text {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .service-card-hotel,
+  .service-image,
+  .lets-talk-btn,
+  .lets-talk-content,
+  .plus-container,
+  .plus-icon,
+  .lets-talk-text,
+  .say-hi-text {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .service-card-hotel:hover .service-image {
+    transform: none;
+  }
+  
+  .lets-talk-btn.hover .lets-talk-content {
+    transform: none;
+    gap: 8px;
+  }
+  
+  .lets-talk-btn.hover .plus-container {
+    transform: none;
+  }
+  
+  .lets-talk-btn.hover .plus-icon {
+    transform: none;
+  }
+  
+  .lets-talk-btn.hover .lets-talk-text {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .lets-talk-btn.hover .say-hi-text {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+}
+
+/* High density screens */
+@media (min-resolution: 192dpi) {
+  .service-image {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Safe area support for notch devices */
+@supports (padding: max(0px)) {
+  .services-header {
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+  }
+  
+  .services-grid-section {
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+  }
+}
